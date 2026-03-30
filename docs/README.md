@@ -1,4 +1,4 @@
-# Minecraft Azure Quests
+# Azure Infrastructure Labs 
 
 An AZ-104 study lab built around a real scenario: deploying and managing a Minecraft server on Azure. Every quest maps to an exam domain and produces working infrastructure. The scenario is just a framing device — the Azure work is real.
 
