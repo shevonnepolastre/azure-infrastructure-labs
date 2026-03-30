@@ -1,28 +1,26 @@
 # Minecraft Azure Quests
 
-A hands-on AZ-104 study environment built around a real-world scenario: running a Minecraft server on Azure. Each quest maps to a core Azure domain and produces working infrastructure — not just notes.
-
-The scenario keeps the work grounded. Every decision (storage for backups, NSGs for access control, VM sizing, DNS) has a practical reason behind it, the same way it would in a production environment.
+An AZ-104 study lab built around a real scenario: deploying and managing a Minecraft server on Azure. Every quest maps to an exam domain and produces working infrastructure. The scenario is just a framing device — the Azure work is real.
 
 ---
 
-## Why This Exists
+## Why I Built It This Way
 
-Passing AZ-104 requires understanding how Azure services work together, not just what they are individually. This repo documents that process — working through real deployments, hitting real errors, and building the kind of muscle memory that doesn't come from practice exams.
+I learn by doing, not by reading. The fastest way for me to internalize how Azure services connect is to deploy something that actually breaks when I misconfigure it. Choosing a Minecraft server gave every decision a concrete reason: storage for world file backups, NSGs to control who can connect, VM sizing that balances cost and performance, DNS so the server has a usable address. The same thinking applies in production environments. The scenario just makes it easier to stay engaged.
 
 ---
 
 ## Quest Structure
 
-Each quest folder maps to an AZ-104 domain and contains scenario documentation, deployment files, and notes on what was learned.
+Each quest folder maps to an AZ-104 exam domain and contains scenario documentation, deployment files, and notes on what I learned — including what broke and why.
 
 | Quest | Domain | What It Covers |
 |-------|--------|----------------|
 | `01-identities-governance` | Identity & Governance | RBAC, resource locks, access control |
-| `02-storage` | Storage | Azure Storage accounts, blob containers, world file backups via AzCopy |
+| `02-storage` | Storage | Storage accounts, blob containers, world file backups via AzCopy |
 | `03-compute-vm` | Compute | VM deployment, sizing, Minecraft server installation |
 | `04-virtual-networking` | Networking | VNets, NSGs, private DNS zones, custom domains |
-| `07-bonusquests/vm-automation-stop-start` | Automation | Scheduled VM start/stop to control costs |
+| `07-bonusquests/vm-automation-stop-start` | Automation | Scheduled VM start/stop for cost control |
 | `monitor` | Monitoring | Azure Monitor, alerts, observability basics |
 
 ---
@@ -48,7 +46,7 @@ minecraft-azure-quests/
 
 ---
 
-## Infrastructure & Tools
+## Infrastructure and Tools
 
 | Tool | How It's Used |
 |------|--------------|
@@ -69,7 +67,7 @@ Two GitHub Actions workflows handle automated deployment:
 - `deploy.yml` — triggers on push to main, deploys core infrastructure via Bicep
 - `deploy-storage-account.yml` — dedicated pipeline for storage account provisioning
 
-This mirrors how infrastructure changes are managed in a real team environment: changes go through version control, pipelines validate and deploy, manual portal clicks are the exception not the rule.
+Infrastructure changes go through version control. The pipeline validates and deploys. Manual portal clicks are the exception.
 
 ---
 
@@ -77,7 +75,7 @@ This mirrors how infrastructure changes are managed in a real team environment: 
 
 Three shell scripts handle server lifecycle on the Azure VM:
 
-- `install.minecraft.sh` — installs Java, downloads the Minecraft server binary, and configures the service
+- `install.minecraft.sh` — installs Java, downloads the server binary, configures the service
 - `start-minecraft.sh` — starts the server process
 - `backup-world.sh` — copies the world directory to Azure Blob Storage using AzCopy
 
@@ -95,7 +93,5 @@ Three shell scripts handle server lifecycle on the Azure VM:
 
 ## Related Projects
 
-This repo is part of a broader Azure portfolio:
-
-- [Azure Hub-Spoke Network Platform](https://github.com/shevonnepolastre/azure-hub-spoke-platform) — enterprise-grade hub-and-spoke architecture in Bicep
+- [Azure Hub-Spoke Network Platform](https://github.com/shevonnepolastre/azure-hub-spoke-platform) — enterprise hub-and-spoke architecture built in Bicep
 - [Intune Assistant Chatbot](https://github.com/shevonnepolastre/intune-assistant-chatbot) — RAG-based chatbot using Azure AI Foundry and Azure Cognitive Search
